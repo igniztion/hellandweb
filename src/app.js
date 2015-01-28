@@ -5,9 +5,9 @@ export class App {
   constructor(router) {
     this.router = router;
     this.router.configure(config => {
-      config.title = 'Aurelia';
+      config.title = 'Helland';
       config.map([
-        { route: ['','home'], moduleId: 'startpage', nav: true, title:'Helland' }
+        { route: ['','home'], moduleId: 'startpage', nav: true, title:'Welcome' }
       ]);
     });
   }
