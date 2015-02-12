@@ -1,0 +1,27 @@
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap";
+
+.page-host{
+  margin-top: 50px;
+}
+
+main{
+  @extend .col-md-8;
+
+  article{
+    @extend .col-md-6;
+    padding-left: 0;
+  }
+}
+aside{
+  @extend .col-md-4;
+  @extend .pull-right;
+
+  label{
+    width: 100%;
+  }
+  span{
+    width: 100%;
+    display: block;
+    padding-bottom: 10px;
+  }
+}

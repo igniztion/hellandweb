@@ -2,4 +2,23 @@
   <header>
       <h1>${heading}</h1>
   </header>
+  <aside>
+    <h2>About me</h2>
+    <fieldset>
+      <label for="name">Name:</label>
+      <span id="name">${sidebar.contactInfo.name}</span>
+      <label for="email">Email:</label>
+      <span id="email"><a href="mailto:${sidebar.contactInfo.email}"> ${sidebar.contactInfo.email}</a></span>
+      <label for="about">About:</label>
+      <span id="about">${sidebar.contactInfo.about}</span>
+    </fieldset>
+  </aside>
+  <main>
+    <h2>Articles</h2>
+    <article repeat.for="article of mainContent.articles">
+      <h3>${article.title}</h3>
+      <p>${article.abstract}</p>
+      <a href.bind="article.url">Read more</a>
+    </article>
+  </main>
 </template>

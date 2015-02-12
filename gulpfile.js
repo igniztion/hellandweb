@@ -14,13 +14,16 @@ var browserSync = require('browser-sync');
 var changed = require('gulp-changed');
 var plumber = require('gulp-plumber');
 var tools = require('aurelia-tools');
+var sass = require('gulp-sass')
 
 var path = {
   source:'src/**/*.js',
   html:'src/**/*.html',
   style:'styles/**/*.css',
+  styleOut: 'styles/',
   output:'dist/',
-  doc:'./doc'
+  doc:'./doc',
+  sass: 'styles/sass/**/*.scss'
 };
 
 var compilerOptions = {
@@ -70,6 +73,12 @@ gulp.task('build-html', function () {
     .pipe(gulp.dest(path.output));
 });
 
+gulp.task('build-sass', function(){
+  return gulp.src(path.sass)
+  .pipe(sass())
+  .pipe(gulp.dest(path.styleOut));
+});
+
 gulp.task('lint', function() {
   return gulp.src(path.source)
     .pipe(jshint(jshintConfig))
@@ -107,7 +116,7 @@ gulp.task('changelog', function(callback) {
 gulp.task('build', function(callback) {
   return runSequence(
     'clean',
-    ['build-system', 'build-html'],
+    ['build-system', 'build-html', 'build-sass'],
     callback
   );
 });
@@ -137,7 +146,7 @@ function reportChange(event){
 gulp.task('watch', ['serve'], function() {
   gulp.watch(path.source, ['build-system', browserSync.reload]).on('change', reportChange);
   gulp.watch(path.html, ['build-html', browserSync.reload]).on('change', reportChange);
-  gulp.watch(path.style, browserSync.reload).on('change', reportChange);
+  gulp.watch(path.sass, ['build-sass', browserSync.reload]).on('change', reportChange);
 });
 
 gulp.task('prepare-release', function(callback){
